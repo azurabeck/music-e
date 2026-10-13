@@ -151,8 +151,8 @@ img {
 /* ---------- Tema claro ---------- */
 
 :root[data-theme='light'] {
-  /* Cinza claro levemente translúcido, mais claro no centro. */
-  --app-background: radial-gradient(ellipse at center, rgba(232, 232, 232, 0.92), rgba(228, 228, 228, 0.9));
+  /* Cinza claro, um pouco mais claro no centro. */
+  --app-background: radial-gradient(ellipse at center, #eaeaea, #e6e6e6);
   --color-bg: #e6e6e6;
   --color-text-muted: #7b7b7b;
   --color-surface: #dadada;
