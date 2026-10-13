@@ -22,4 +22,14 @@ const result = spawnSync(
   `npx electron-builder --win nsis --publish ${publish} "-c.artifactName=MUSIC-E-Setup-${displayVersion}.\${ext}"`,
   { cwd: root, stdio: 'inherit', shell: true }
 );
-process.exit(result.status ?? 1);
+if (result.status !== 0) process.exit(result.status ?? 1);
+
+// Apaga os instaladores das versões anteriores (só depois de o novo ter sido gerado).
+const distDir = path.join(root, 'dist');
+const current = `MUSIC-E-Setup-${displayVersion}.exe`;
+fs.readdirSync(distDir)
+  .filter((file) => /^MUSIC-E[ -]Setup[ -].*\.exe(\.blockmap)?$/.test(file) && !file.startsWith(current))
+  .forEach((file) => {
+    fs.rmSync(path.join(distDir, file));
+    console.log(`Removido instalador antigo: ${file}`);
+  });
