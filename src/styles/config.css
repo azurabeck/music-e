@@ -10,7 +10,9 @@
 .config__instruments {
   position: absolute;
   left: 568px;
-  top: 141px;
+  top: 145px;
+  /* 16px na tela: a janela é exibida a 80% do design. */
+  font-size: 20px;
   color: var(--color-text-dim);
 }
 
@@ -283,7 +285,7 @@ input:focus-visible + .toggle {
 }
 
 .config__status.is-error {
-  color: var(--color-accent);
+  color: var(--color-wrong);
 }
 
 .config__status.is-success {

@@ -19,9 +19,12 @@
     <div class="app">
       <!-- Controles da janela (compartilhados por todas as telas) -->
       <nav class="window-nav">
-        <button class="window-nav__btn window-nav__btn--minimize" id="btn-minimize" aria-label="Minimizar"></button>
-        <button class="window-nav__btn window-nav__btn--close" id="btn-close" aria-label="Fechar"></button>
-        <img class="window-nav__icons" src="assets/nav.svg" alt="" />
+        <button class="window-nav__btn window-nav__btn--minimize" id="btn-minimize" aria-label="Minimizar">
+          <img src="assets/nav-minimize.svg" alt="" />
+        </button>
+        <button class="window-nav__btn" id="btn-close" aria-label="Fechar">
+          <img src="assets/nav-close.svg" alt="" />
+        </button>
       </nav>
 
       <!-- TELA 1 — Loading -->
@@ -47,7 +50,7 @@
           </div>
 
           <label class="search">
-            <img class="search__bg" src="assets/search.svg" alt="" />
+            <img class="search__icon" src="assets/search-icon.svg" alt="" />
             <input
               class="search__input"
               id="search-input"
@@ -227,9 +230,9 @@
         <footer class="tabs">
           <button class="tabs__item is-active" data-tab="cifras">CIFRAS</button>
           <button class="tabs__item" data-tab="partituras">PARTITURAS</button>
-          <button class="tabs__item" data-tab="treinar">TREINAR<br />PARTITURA</button>
-          <button class="tabs__item" data-tab="acordes">Dicionário de<br />Acordes</button>
-          <button class="tabs__item" data-tab="config">Configurações</button>
+          <button class="tabs__item" data-tab="treinar">TREINAR PARTITURA</button>
+          <button class="tabs__item" data-tab="acordes">DICIONÁRIO DE ACORDES</button>
+          <button class="tabs__item" data-tab="config">CONFIGURAÇÕES</button>
         </footer>
       </section>
     </div>

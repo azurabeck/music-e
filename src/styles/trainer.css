@@ -10,7 +10,8 @@
 .trainer__clefs {
   position: absolute;
   left: 560px;
-  top: 139px;
+  top: 143px;
+  font-size: 20px;
   color: var(--color-text-dim);
 }
 
@@ -83,7 +84,7 @@
 }
 
 .trainer__feedback.is-wrong {
-  color: var(--color-accent);
+  color: var(--color-wrong);
 }
 
 /* ---------- Pauta ---------- */
@@ -152,12 +153,12 @@
 }
 
 .trainer__note.is-wrong .trainer__head {
-  fill: var(--color-accent);
+  fill: var(--color-wrong);
 }
 
 .trainer__note.is-wrong .trainer__stem,
 .trainer__note.is-wrong .trainer__ledger {
-  stroke: var(--color-accent);
+  stroke: var(--color-wrong);
 }
 
 /* Resposta certa mostrada depois de um erro */

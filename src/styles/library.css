@@ -148,8 +148,8 @@
   left: 0;
   top: 196px;
   width: 100%;
-  height: 570px;
-  padding: 0 74px;
+  height: 612px;
+  padding: 0 74px 12px;
   display: flex;
   align-items: flex-start;
   gap: 37px;
@@ -240,6 +240,7 @@
 
 .band.is-expanded {
   background: var(--color-surface);
+  box-shadow: var(--shadow-panel);
 }
 
 .band__header {
@@ -372,22 +373,21 @@
 }
 
 .band__details-inner {
-  position: relative;
   min-height: 0;
   overflow: hidden;
 }
 
 .band__divider {
-  position: absolute;
-  left: 9px;
-  top: 12.5px;
   display: block;
+  margin: 12.5px 0 0 9px;
 }
 
 .band__songs {
   list-style: none;
-  max-height: 300px;
-  padding: 48px 16px 60px;
+  /* Mostra no máximo 3 músicas; as demais aparecem rolando a lista. */
+  max-height: 116px;
+  margin: 14px 8px 24px 0;
+  padding: 18px 8px 12px 16px;
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -400,7 +400,7 @@
 
 .band__songs::-webkit-scrollbar-thumb {
   border-radius: 4px;
-  background: var(--color-surface-raised);
+  background: var(--color-song-scroll);
 }
 
 .band__song {
@@ -414,7 +414,7 @@
   /* 14px na tela (ver comentário em .band__header). */
   font-size: 17.5px;
   line-height: normal;
-  color: var(--color-text-muted);
+  color: var(--color-song);
   white-space: nowrap;
   cursor: pointer;
   outline: none;
@@ -428,7 +428,7 @@
 
 /* Arquivo que não existe mais na pasta */
 .band__song.is-missing {
-  color: var(--color-accent);
+  color: var(--color-wrong);
   text-decoration: line-through;
 }
 
@@ -514,6 +514,7 @@
 
 .bands--list .band__songs {
   max-height: none;
+  margin: 0;
   padding: 10px 16px 22px 100px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

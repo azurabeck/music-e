@@ -50,43 +50,47 @@
   left: 156px;
   top: 51px;
   font-size: 24px;
-  color: var(--color-accent);
+  color: var(--color-brand);
 }
 
 .search {
   position: absolute;
-  left: 244px;
-  top: 24px;
-  width: 1170px;
-  height: 52px;
+  left: 258px;
+  top: 23px;
+  width: 1172px;
+  height: 47px;
+  border: 1px solid var(--color-search-border);
+  border-radius: 12px;
+  background: var(--color-search-bg);
   cursor: text;
 }
 
-.search__bg {
+.search__icon {
   position: absolute;
-  inset: 0;
+  right: 30px;
+  top: 9.5px;
   display: block;
   pointer-events: none;
 }
 
 .search__input {
   position: absolute;
-  left: 20px;
+  left: 21px;
   top: 0;
   width: 1080px;
-  height: 52px;
+  height: 100%;
   border: 0;
   outline: none;
   background: transparent;
   font-family: inherit;
-  font-size: 28px;
+  font-size: 20px;
   line-height: normal;
   color: var(--color-search-text);
   caret-color: var(--color-accent);
 }
 
 .search__input::placeholder {
-  color: var(--color-text-dim);
+  color: var(--color-placeholder);
 }
 
 /* ---------- Botão em formato de pílula ---------- */
@@ -125,26 +129,27 @@
 
 .tabs {
   position: absolute;
-  left: 301px;
-  top: 786px;
+  left: 316px;
+  top: 819px;
   z-index: 2;
   display: flex;
 }
 
 /* Abas coladas: só os cantos de cima das pontas são arredondados. */
 .tabs__item {
-  width: 199.4px;
-  height: 114px;
+  width: 193.75px;
+  height: 75px;
+  padding: 3px 0 0;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 0;
-  background: var(--color-surface-raised);
+  background: var(--color-tab-bg);
   font-family: inherit;
-  font-size: 24px;
+  /* 16px para "DICIONÁRIO DE ACORDES" caber com folga na aba. */
+  font-size: 16px;
   line-height: normal;
   color: var(--color-tab-text);
-  text-align: left;
   white-space: nowrap;
   cursor: pointer;
   outline: none;
@@ -152,27 +157,25 @@
 }
 
 .tabs__item:first-child {
-  border-top-left-radius: 15px;
+  border-top-left-radius: 22px;
 }
 
 .tabs__item:last-child {
-  border-top-right-radius: 15px;
+  border-top-right-radius: 22px;
 }
 
 .tabs__item + .tabs__item {
-  box-shadow: inset 1px 0 0 rgba(var(--overlay-rgb), 0.05);
+  box-shadow: inset 1px 0 0 var(--color-tab-separator);
 }
 
 .tabs__item:hover,
 .tabs__item:focus-visible {
-  background: var(--color-surface-hover);
+  background: var(--color-tab-hover);
 }
 
-.tabs__item.is-active {
+.tabs__item.is-active,
+.tabs__item.is-active:hover {
+  background: var(--color-tab-active-bg);
   color: var(--color-tab-active);
   cursor: default;
-}
-
-.tabs__item.is-active:hover {
-  background: var(--color-surface-raised);
 }

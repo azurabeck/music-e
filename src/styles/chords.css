@@ -10,7 +10,8 @@
 .chords__instruments {
   position: absolute;
   left: 568px;
-  top: 141px;
+  top: 145px;
+  font-size: 20px;
   color: var(--color-text-dim);
 }
 

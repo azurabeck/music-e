@@ -25,6 +25,18 @@
   --color-divider: #050505;
   --color-toggle-off: #4a4a4a;
   --app-background: var(--color-bg);
+  --color-brand: #d4004e;
+  --color-placeholder: var(--color-text-dim);
+  --color-tab-bg: var(--color-surface-raised);
+  --color-tab-active-bg: var(--color-surface-raised);
+  --color-tab-separator: rgba(255, 255, 255, 0.05);
+  --color-search-bg: var(--color-surface-raised);
+  --color-search-border: transparent;
+  --shadow-panel: none;
+  --color-song: var(--color-text-muted);
+  --color-song-scroll: var(--color-surface-raised);
+  --color-tab-hover: var(--color-surface-hover);
+  --color-wrong: var(--color-accent);
   /* Cor (RGB) dos realces translúcidos de hover/foco. */
   --overlay-rgb: 255, 255, 255;
 
@@ -93,31 +105,21 @@ img {
 
 /* ---------- Controles da janela ---------- */
 
-/* Ícones a 75% do tamanho do design, alinhados pela direita. */
 .window-nav {
   position: absolute;
-  left: 1498.75px;
-  top: 41px;
-  width: 62.25px;
-  height: 18px;
+  left: 1506.5px;
+  top: 31.5px;
   z-index: 10;
-}
-
-.window-nav__icons {
-  position: absolute;
-  left: -0.56px;
-  top: -0.56px;
-  width: 63.375px;
-  height: 19.125px;
-  display: block;
-  pointer-events: none;
+  display: flex;
+  gap: 3.5px;
 }
 
 .window-nav__btn {
-  position: absolute;
-  top: -7px;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
   border-radius: 50%;
   background: transparent;
@@ -126,12 +128,14 @@ img {
   transition: background-color 160ms ease;
 }
 
-.window-nav__btn--minimize {
-  left: -7px;
+.window-nav__btn img {
+  display: block;
+  pointer-events: none;
 }
 
-.window-nav__btn--close {
-  left: 37.25px;
+/* No design o traço de minimizar fica um pouco abaixo do centro do X. */
+.window-nav__btn--minimize img {
+  transform: translateY(3px);
 }
 
 .window-nav__btn:hover,
@@ -139,8 +143,8 @@ img {
   background: rgba(var(--overlay-rgb), 0.08);
 }
 
-.window-nav__btn--close:hover,
-.window-nav__btn--close:focus-visible {
+.window-nav__btn#btn-close:hover,
+.window-nav__btn#btn-close:focus-visible {
   background: rgba(212, 0, 78, 0.35);
 }
 
@@ -151,56 +155,66 @@ img {
 /* ---------- Tema claro ---------- */
 
 :root[data-theme='light'] {
-  /* Cinza claro, um pouco mais claro no centro. */
-  --app-background: radial-gradient(ellipse at center, #eaeaea, #e6e6e6);
-  --color-bg: #e6e6e6;
-  --color-text-muted: #7b7b7b;
-  --color-surface: #dadada;
-  --color-surface-raised: #d2d2d2;
-  --color-surface-hover: #c6c6c6;
-  --color-text-dim: #655f5f;
-  --color-text-light: #313131;
-  --color-search-text: #313131;
-  --color-band-name: #9e5d5d;
-  --color-tab-text: #000000;
-  --color-tab-active: var(--color-accent);
-  --color-right: #1f9d5c;
-  --color-scroll: #0a0a0a;
-  --color-divider: #313131;
-  --color-toggle-off: #b8b8b8;
+  --app-background: #efefef;
+  --color-bg: #efefef;
+  --color-text-muted: #6b6b6b;
+  --color-surface: #f5f5f5;
+  --color-surface-raised: #e2e2e2;
+  --color-surface-hover: #d6d6d6;
+  /* Azul-acinzentado dos textos secundários do tema claro. */
+  --color-slate: #5d6f92;
+  --color-text-dim: var(--color-slate);
+  --color-text-light: #1a1a1a;
+  --color-band-name: #1a1a1a;
+  --color-search-bg: #ffffff;
+  --color-search-border: #1a1a1a;
+  --color-search-text: #1a1a1a;
+  --color-placeholder: #6b6b6b;
+  --color-tab-bg: #e3e1e2;
+  --color-tab-hover: #d8d6d7;
+  --color-tab-text: var(--color-slate);
+  --color-tab-active: #ffd9e6;
+  --color-tab-active-bg: var(--color-accent);
+  --color-tab-separator: #ededed;
+  --color-song: var(--color-slate);
+  --color-song-scroll: var(--color-slate);
+  --color-right: #12a150;
+  --color-scroll: #b9b9b9;
+  --color-divider: #b9b9b9;
+  --color-toggle-off: #b9b9b9;
+  --shadow-panel: 0 4px 4px rgba(0, 0, 0, 0.25);
   --overlay-rgb: 0, 0, 0;
 
-  --chord-string: #8a8a8a;
-  --chord-fret: #cfcfcf;
-  --chord-mark: #313131;
-  --chord-mute: #7b7b7b;
-  --piano-white: #f4f4f4;
-  --piano-black: #313131;
+  --chord-string: #6b6b6b;
+  --chord-fret: #d9d9d9;
+  --chord-mark: #1a1a1a;
+  --chord-mute: #6b6b6b;
+  --piano-white: #ffffff;
+  --piano-black: #1a1a1a;
   --piano-dot: var(--color-accent);
-  --staff-line: #b0b0b0;
-  --staff-note: #655f5f;
+  --staff-line: #b9b9b9;
+  --staff-note: #6b6b6b;
 }
 
-/* Ícones brancos do tema escuro viram cinza/preto no claro
+/* Ícones brancos do tema escuro viram escuros no claro
    (a tela de loading continua escura). */
-:root[data-theme='light'] .app:has(#screen-main.is-active) .window-nav__icons {
-  filter: invert(0.52);
+:root[data-theme='light'] .app:has(#screen-main.is-active) .window-nav__btn img,
+:root[data-theme='light'] .search__icon {
+  filter: invert(0.75);
 }
 
 :root[data-theme='light'] .library__options-toggle img {
-  filter: invert(1) hue-rotate(180deg);
+  content: url('../assets/ellipsis-circle-light.svg');
 }
 
-:root[data-theme='light'] .search__bg {
-  content: url('../assets/search-light.svg');
+:root[data-theme='light'] .topbar__logo-title {
+  color: #3a3a3a;
 }
 
 :root[data-theme='light'] .band__divider {
-  filter: invert(0.9);
+  filter: invert(0.75);
 }
 
-/* No tema claro os botões de contorno e os rádios desmarcados são escuros,
-   e os textos de apoio das configurações ficam em cinza. */
 :root[data-theme='light'] .pill-button {
   border-color: var(--color-text-light);
   color: var(--color-text-light);
@@ -208,14 +222,11 @@ img {
 
 :root[data-theme='light'] .pill-button:hover,
 :root[data-theme='light'] .pill-button:focus-visible {
-  background: rgba(var(--overlay-rgb), 0.08);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
-:root[data-theme='light'] .option--radio:not(:has(input:checked)) .option__mark {
-  background: var(--color-text-light);
-}
-
-:root[data-theme='light'] .config__subtitle,
-:root[data-theme='light'] .config__dir-label {
-  color: var(--color-text-muted);
+/* Rádios e caixas desmarcados precisam aparecer sobre o fundo claro. */
+:root[data-theme='light'] .option:not(:has(input:checked)) .option__mark {
+  background: #cfcfcf;
 }
