@@ -1,0 +1,173 @@
+/* TELA 5 — Treinar Partitura */
+
+.trainer {
+  font-size: 24px;
+  white-space: nowrap;
+}
+
+/* ---------- Clave + enunciado ---------- */
+
+.trainer__clefs {
+  position: absolute;
+  left: 560px;
+  top: 139px;
+  color: var(--color-text-dim);
+}
+
+.trainer__clef-option {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: var(--color-text-dim);
+  cursor: pointer;
+  outline: none;
+  transition: color 160ms ease;
+}
+
+.trainer__clef-option:hover,
+.trainer__clef-option:focus-visible {
+  color: var(--color-text-light);
+}
+
+.trainer__clef-option.is-active {
+  color: var(--color-accent);
+  cursor: default;
+}
+
+.trainer__subtitle {
+  position: absolute;
+  left: 560px;
+  top: 169px;
+  color: var(--color-text-light);
+}
+
+.trainer__score {
+  position: absolute;
+  right: 89px;
+  top: 145px;
+  font-size: 20px;
+  color: var(--color-text-dim);
+}
+
+/* Nota pedida no modo "marque a posição" */
+.trainer__target {
+  position: absolute;
+  left: 0;
+  top: 203px;
+  width: 100%;
+  font-size: 98px;
+  text-align: center;
+  color: var(--color-text-light);
+  pointer-events: none;
+}
+
+/* No modo "marque a posição" não há campo de resposta. */
+.trainer[data-mode='place'] .answer-input,
+.trainer[data-mode='place'] .answer-button {
+  display: none;
+}
+
+.trainer__feedback {
+  position: absolute;
+  left: 0;
+  top: 312px;
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
+  color: var(--color-text-dim);
+  pointer-events: none;
+}
+
+.trainer__feedback.is-right {
+  color: var(--color-right);
+}
+
+.trainer__feedback.is-wrong {
+  color: var(--color-accent);
+}
+
+/* ---------- Pauta ---------- */
+
+.trainer__staff {
+  position: absolute;
+  left: 0;
+  top: 340px;
+  display: block;
+}
+
+.trainer[data-mode='place'] .trainer__staff {
+  cursor: pointer;
+}
+
+.trainer__line,
+.trainer__ledger {
+  stroke: var(--staff-line);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.trainer__ledger {
+  stroke: #737373;
+}
+
+.trainer__clef {
+  fill: #000000;
+  font-family: 'Segoe UI Symbol', 'Noto Music', serif;
+  pointer-events: none;
+}
+
+.trainer__clef--g {
+  font-size: 220px;
+  transform: translate(114px, 203px);
+}
+
+.trainer__clef--f {
+  font-size: 190px;
+  transform: translate(117px, 194px);
+}
+
+.trainer__head {
+  fill: var(--staff-note);
+}
+
+.trainer__stem {
+  fill: none;
+  stroke: var(--staff-note);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.trainer__note.is-ghost {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.trainer__note.is-right .trainer__head {
+  fill: var(--color-right);
+}
+
+.trainer__note.is-right .trainer__stem,
+.trainer__note.is-right .trainer__ledger {
+  stroke: var(--color-right);
+}
+
+.trainer__note.is-wrong .trainer__head {
+  fill: var(--color-accent);
+}
+
+.trainer__note.is-wrong .trainer__stem,
+.trainer__note.is-wrong .trainer__ledger {
+  stroke: var(--color-accent);
+}
+
+/* Resposta certa mostrada depois de um erro */
+.trainer__note.is-answer .trainer__head {
+  fill: var(--color-right);
+  opacity: 0.7;
+}
+
+.trainer__note.is-answer .trainer__stem,
+.trainer__note.is-answer .trainer__ledger {
+  stroke: var(--color-right);
+  opacity: 0.7;
+}

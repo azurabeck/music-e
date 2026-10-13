@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self'; img-src 'self' file:; font-src 'self'; script-src 'self'"
+    />
+    <title>MUSIC-E</title>
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/loading.css" />
+    <link rel="stylesheet" href="styles/shell.css" />
+    <link rel="stylesheet" href="styles/library.css" />
+    <link rel="stylesheet" href="styles/config.css" />
+    <link rel="stylesheet" href="styles/chords.css" />
+    <link rel="stylesheet" href="styles/trainer.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Controles da janela (compartilhados por todas as telas) -->
+      <nav class="window-nav">
+        <button class="window-nav__btn window-nav__btn--minimize" id="btn-minimize" aria-label="Minimizar"></button>
+        <button class="window-nav__btn window-nav__btn--close" id="btn-close" aria-label="Fechar"></button>
+        <img class="window-nav__icons" src="assets/nav.svg" alt="" />
+      </nav>
+
+      <!-- TELA 1 — Loading -->
+      <section class="screen loading is-active" id="screen-loading" data-window-drag>
+        <img class="loading__image" src="assets/guitar.png" alt="" />
+
+        <div class="loading__logo">
+          <p class="loading__logo-title">MUSIC-E</p>
+          <p class="loading__logo-sub">mi</p>
+        </div>
+
+        <div class="loading__spinner" role="status" aria-label="Carregando">
+          <img src="assets/refresh.svg" alt="" />
+        </div>
+      </section>
+
+      <!-- Base das telas internas: topo com busca + abas do rodapé -->
+      <section class="screen shell" id="screen-main">
+        <div class="topbar" data-window-drag>
+          <div class="topbar__logo">
+            <p class="topbar__logo-title">MUSIC-E</p>
+            <p class="topbar__logo-sub">mi</p>
+          </div>
+
+          <label class="search">
+            <img class="search__bg" src="assets/search.svg" alt="" />
+            <input
+              class="search__input"
+              id="search-input"
+              type="text"
+              placeholder="Procure por música ou artista"
+              spellcheck="false"
+              autocomplete="off"
+            />
+          </label>
+        </div>
+
+        <!-- TELA 2 — Cifras (violão) e Partituras (piano) -->
+        <div class="view library is-active" id="view-cifras" data-instrument="violao" data-noun="cifra">
+          <p class="library__path">
+            <span class="library__path-label">Seus arquivos de cifra em:</span>
+            <span class="library__path-value"></span>
+          </p>
+
+          <button class="pill-button library__write">Escrever cifra própria</button>
+
+          <div class="bands"></div>
+          <button class="bands__arrow bands__arrow--prev" aria-label="Anteriores" hidden></button>
+          <button class="bands__arrow bands__arrow--next" aria-label="Próximos" hidden></button>
+          <p class="bands__empty" hidden></p>
+        </div>
+
+        <div class="view library" id="view-partituras" data-instrument="piano" data-noun="partitura">
+          <p class="library__path">
+            <span class="library__path-label">Seus arquivos de partitura em:</span>
+            <span class="library__path-value"></span>
+          </p>
+
+          <div class="bands"></div>
+          <button class="bands__arrow bands__arrow--prev" aria-label="Anteriores" hidden></button>
+          <button class="bands__arrow bands__arrow--next" aria-label="Próximos" hidden></button>
+          <p class="bands__empty" hidden></p>
+        </div>
+
+        <!-- TELA 4 — Dicionário de Acordes -->
+        <div class="view chords" id="view-acordes" data-instrument="violao">
+          <p class="chords__instruments">
+            <button class="chords__instrument" data-instrument="piano">PIANO</button>
+            |
+            <button class="chords__instrument is-active" data-instrument="violao">VIOLÃO</button>
+          </p>
+          <p class="chords__subtitle">ME DIZ QUAL NOTA VOCÊ ESTA PROCURANDO</p>
+
+          <input class="answer-input answer-input--centered" id="chords-input" type="text" spellcheck="false" autocomplete="off" aria-label="Acorde" />
+
+          <div class="chords__grid" id="chords-grid"></div>
+          <p class="chords__empty" id="chords-empty" hidden>Nenhum acorde encontrado</p>
+        </div>
+
+        <!-- TELA 5 — Treinar Partitura -->
+        <div class="view trainer" id="view-treinar" data-mode="name">
+          <p class="trainer__clefs">
+            CLAVE DE:
+            <button class="trainer__clef-option" data-clef="F">F</button>
+            |
+            <button class="trainer__clef-option is-active" data-clef="G">G</button>
+          </p>
+          <p class="trainer__subtitle" id="trainer-subtitle"></p>
+          <p class="trainer__score" id="trainer-score"></p>
+
+          <p class="trainer__target" id="trainer-target"></p>
+          <input class="answer-input" id="trainer-input" type="text" maxlength="3" spellcheck="false" autocomplete="off" aria-label="Nota" />
+          <button class="pill-button answer-button" id="trainer-submit">PRONTO</button>
+          <p class="trainer__feedback" id="trainer-feedback" role="status"></p>
+
+          <svg class="trainer__staff" id="trainer-staff" width="1600" height="330" viewBox="0 0 1600 330"></svg>
+        </div>
+
+        <!-- TELA 3 — Configurações -->
+        <div class="view config" id="view-config">
+          <p class="config__instruments">
+            <button class="config__instrument" data-instrument="piano">PIANO</button>
+            |
+            <button class="config__instrument is-active" data-instrument="violao">VIOLÃO</button>
+            |
+            <button class="config__instrument" data-instrument="app">APLICATIVO</button>
+          </p>
+          <p class="config__subtitle" id="config-subtitle">Configurações para suas notas de violão</p>
+
+          <!-- Configurações por instrumento -->
+          <div id="config-instrument-panel">
+            <label class="config__dir-label" for="config-folder" id="config-folder-label">Diretório das cifras</label>
+            <input class="config__dir-input" id="config-folder" type="text" spellcheck="false" autocomplete="off" />
+            <button class="config__dir-pick" id="config-pick-folder" aria-label="Escolher pasta">
+              <img src="assets/folder.svg" alt="" />
+            </button>
+            <button class="pill-button config__save" id="config-save">Salvar</button>
+
+            <hr class="config__divider" />
+
+            <p class="config__section config__section--model">Modelo dos nomes</p>
+            <label class="option option--radio config__model-1">
+              <input type="radio" name="config-pattern" value="{musica} - {artista}" />
+              <span class="option__mark"></span>
+              <span class="option__label">Música - Banda</span>
+            </label>
+            <label class="option option--radio config__model-2">
+              <input type="radio" name="config-pattern" value="{artista} - {musica}" />
+              <span class="option__mark"></span>
+              <span class="option__label">Banda - Música</span>
+            </label>
+
+            <label class="config__rename">
+              <span class="config__rename-label">Renomear arquivos na pasta</span>
+              <input type="checkbox" id="config-rename" />
+              <span class="toggle"><span class="toggle__knob"></span></span>
+            </label>
+
+            <p class="config__section config__section--info">Procurar por informações</p>
+            <div class="config__info" id="config-info">
+              <label class="option option--check">
+                <input type="checkbox" data-info="artistImage" />
+                <span class="option__mark"></span>
+                <span class="option__label">Imagem da Banda</span>
+              </label>
+              <label class="option option--check">
+                <input type="checkbox" data-info="album" />
+                <span class="option__mark"></span>
+                <span class="option__label">Album da música</span>
+              </label>
+              <label class="option option--check">
+                <input type="checkbox" data-info="year" />
+                <span class="option__mark"></span>
+                <span class="option__label">Ano de Lançamento</span>
+              </label>
+              <label class="option option--check">
+                <input type="checkbox" data-info="videoLesson" />
+                <span class="option__mark"></span>
+                <span class="option__label">Vídeo Aula</span>
+              </label>
+              <label class="option option--check">
+                <input type="checkbox" data-info="spotify" />
+                <span class="option__mark"></span>
+                <span class="option__label">Link spotify</span>
+              </label>
+              <label class="option option--check">
+                <input type="checkbox" data-info="youtube" />
+                <span class="option__mark"></span>
+                <span class="option__label">Link youtube</span>
+              </label>
+            </div>
+
+            <p class="config__status" id="config-status" role="status"></p>
+            <button class="pill-button config__generate" id="config-generate">Gerar JSON</button>
+          </div>
+
+          <!-- Configurações do aplicativo -->
+          <div id="config-app-panel" hidden>
+            <p class="config__section config__section--resolution">Resolução</p>
+            <div class="config__row config__row--resolution" id="config-scales">
+              <label class="option option--radio"><input type="radio" name="config-scale" value="1" /><span class="option__mark"></span><span class="option__label">1600 x 900</span></label>
+              <label class="option option--radio"><input type="radio" name="config-scale" value="0.9" /><span class="option__mark"></span><span class="option__label">1440 x 810</span></label>
+              <label class="option option--radio"><input type="radio" name="config-scale" value="0.8" /><span class="option__mark"></span><span class="option__label">1280 x 720</span></label>
+              <label class="option option--radio"><input type="radio" name="config-scale" value="0.7" /><span class="option__mark"></span><span class="option__label">1120 x 630</span></label>
+              <label class="option option--radio"><input type="radio" name="config-scale" value="0.6" /><span class="option__mark"></span><span class="option__label">960 x 540</span></label>
+            </div>
+
+            <hr class="config__divider" />
+
+            <p class="config__section config__section--model">Tema</p>
+            <div class="config__row config__row--theme">
+              <label class="option option--radio"><input type="radio" name="config-theme" value="dark" /><span class="option__mark"></span><span class="option__label">Escuro</span></label>
+              <label class="option option--radio"><input type="radio" name="config-theme" value="light" /><span class="option__mark"></span><span class="option__label">Claro</span></label>
+            </div>
+
+            <p class="config__section config__section--info">Versão</p>
+            <p class="config__version">Versão atual: <span id="config-version"></span></p>
+            <p class="config__status config__status--update" id="config-update-status" role="status"></p>
+            <button class="pill-button config__update" id="config-update">Atualizar versão</button>
+          </div>
+        </div>
+
+        <footer class="tabs">
+          <button class="tabs__item is-active" data-tab="cifras">CIFRAS</button>
+          <button class="tabs__item" data-tab="partituras">PARTITURAS</button>
+          <button class="tabs__item" data-tab="treinar">TREINAR<br />PARTITURA</button>
+          <button class="tabs__item" data-tab="acordes">Dicionário de<br />Acordes</button>
+          <button class="tabs__item" data-tab="config">Configurações</button>
+        </footer>
+      </section>
+    </div>
+
+    <script src="data/chords.js"></script>
+    <script src="screens/library.js"></script>
+    <script src="screens/chords.js"></script>
+    <script src="screens/trainer.js"></script>
+    <script src="screens/config.js"></script>
+    <script src="renderer.js"></script>
+  </body>
+</html>

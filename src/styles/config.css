@@ -1,0 +1,337 @@
+/* TELA 3 — Configurações (Figma node 3:4020) */
+
+.config {
+  font-size: 24px;
+  white-space: nowrap;
+}
+
+/* ---------- Instrumento ---------- */
+
+.config__instruments {
+  position: absolute;
+  left: 568px;
+  top: 141px;
+  color: var(--color-text-dim);
+}
+
+.config__instrument {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: var(--color-text-dim);
+  cursor: pointer;
+  outline: none;
+  transition: color 160ms ease;
+}
+
+.config__instrument:hover,
+.config__instrument:focus-visible {
+  color: var(--color-text-light);
+}
+
+.config__instrument.is-active {
+  color: var(--color-accent);
+  cursor: default;
+}
+
+.config__subtitle {
+  position: absolute;
+  left: 568px;
+  top: 169px;
+  color: var(--color-text-light);
+}
+
+/* ---------- Diretório ---------- */
+
+/* Ancorado pela direita: o texto muda conforme o instrumento. */
+.config__dir-label {
+  position: absolute;
+  right: 1100px;
+  top: 247px;
+  color: var(--color-text-light);
+}
+
+.config__dir-input {
+  position: absolute;
+  left: 536px;
+  top: 239px;
+  width: 597px;
+  height: 39px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 8px;
+  outline: none;
+  background: var(--color-surface-raised);
+  font-family: inherit;
+  font-size: 20px;
+  line-height: normal;
+  color: var(--color-text-light);
+  caret-color: var(--color-accent);
+}
+
+.config__dir-pick {
+  position: absolute;
+  left: 1160.5px;
+  top: 243.5px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  transition: filter 160ms ease, transform 160ms ease;
+}
+
+.config__dir-pick img {
+  display: block;
+}
+
+.config__dir-pick:hover,
+.config__dir-pick:focus-visible {
+  filter: brightness(1.35);
+  transform: scale(1.08);
+}
+
+.config__save {
+  position: absolute;
+  left: 1210px;
+  top: 240px;
+  width: 88px;
+  padding: 0;
+  text-align: center;
+}
+
+.config__divider {
+  position: absolute;
+  left: 301px;
+  top: 337px;
+  width: 997px;
+  height: 1px;
+  border: 0;
+  background: var(--color-divider);
+}
+
+/* ---------- Seções ---------- */
+
+.config__section {
+  position: absolute;
+  left: 301px;
+  color: var(--color-text-light);
+}
+
+.config__section--model {
+  top: 373px;
+}
+
+.config__section--info {
+  top: 486px;
+}
+
+/* ---------- Opções (rádio e caixa de seleção) ---------- */
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text-dim);
+  cursor: pointer;
+  transition: color 160ms ease;
+}
+
+.option input,
+.config__rename input,
+.library__menu-row input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.option__mark {
+  flex: none;
+  width: 20px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--color-surface-raised);
+  transition: background-color 160ms ease;
+}
+
+.option--radio .option__mark {
+  height: 20px;
+  border-radius: 50%;
+}
+
+.option:hover {
+  color: var(--color-text-muted);
+}
+
+.option:hover .option__mark {
+  background: var(--color-surface-hover);
+}
+
+.option:has(input:checked) {
+  color: var(--color-text-light);
+}
+
+.option:has(input:checked) .option__mark {
+  background: var(--color-accent);
+}
+
+.option:has(input:focus-visible) .option__mark {
+  box-shadow: 0 0 0 2px rgba(var(--overlay-rgb), 0.25);
+}
+
+.config__model-1,
+.config__model-2 {
+  position: absolute;
+  top: 411px;
+}
+
+.config__model-1 {
+  left: 301px;
+}
+
+.config__model-2 {
+  left: 556px;
+}
+
+.config__info {
+  position: absolute;
+  left: 301px;
+  top: 523px;
+  display: grid;
+  grid-template-columns: 256px 238px 268px auto;
+  row-gap: 20px;
+}
+
+/* ---------- Renomear arquivos ---------- */
+
+.config__rename {
+  position: absolute;
+  left: 917px;
+  top: 410px;
+  width: 381px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--color-text-dim);
+  cursor: pointer;
+}
+
+.toggle {
+  position: relative;
+  flex: none;
+  width: 94px;
+  height: 19px;
+  border-radius: 2px;
+  background: var(--color-surface-raised);
+}
+
+.toggle__knob {
+  position: absolute;
+  left: 48px;
+  top: 0;
+  width: 46px;
+  height: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  background: var(--color-toggle-off);
+  font-size: 13px;
+  color: var(--color-text-light);
+  transition: left 180ms ease, background-color 180ms ease;
+}
+
+.toggle__knob::before {
+  content: 'off';
+}
+
+input:checked + .toggle .toggle__knob {
+  left: 0;
+  background: var(--color-accent);
+  color: var(--color-white);
+}
+
+input:checked + .toggle .toggle__knob::before {
+  content: 'on';
+}
+
+input:focus-visible + .toggle {
+  box-shadow: 0 0 0 2px rgba(var(--overlay-rgb), 0.25);
+}
+
+/* ---------- Gerar JSON ---------- */
+
+.config__generate {
+  position: absolute;
+  left: 1173px;
+  top: 674px;
+  width: 125px;
+  padding: 0 0 0 3px;
+  text-align: center;
+}
+
+.config__status {
+  position: absolute;
+  right: 447px;
+  top: 681px;
+  max-width: 850px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 20px;
+  color: var(--color-text-dim);
+}
+
+.config__status.is-error {
+  color: var(--color-accent);
+}
+
+.config__status.is-success {
+  color: var(--color-text-light);
+}
+
+/* ---------- Aplicativo: resolução, tema e versão ---------- */
+
+.config__section--resolution {
+  top: 240px;
+}
+
+.config__row {
+  position: absolute;
+  left: 301px;
+  display: flex;
+  gap: 44px;
+}
+
+.config__row--resolution {
+  top: 279px;
+}
+
+.config__row--theme {
+  top: 411px;
+}
+
+.config__version {
+  position: absolute;
+  left: 301px;
+  top: 523px;
+  color: var(--color-text-dim);
+}
+
+.config__version span {
+  color: var(--color-text-light);
+}
+
+.config__update {
+  position: absolute;
+  left: 1118px;
+  top: 516px;
+  width: 180px;
+  padding: 0;
+  text-align: center;
+}
+
+.config__status--update {
+  right: 502px;
+  top: 523px;
+}

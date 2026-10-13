@@ -1,0 +1,200 @@
+/* TELA 4 — Dicionário de Acordes (Figma node 3:3617) */
+
+.chords {
+  font-size: 24px;
+  white-space: nowrap;
+}
+
+/* ---------- Instrumento + busca ---------- */
+
+.chords__instruments {
+  position: absolute;
+  left: 568px;
+  top: 141px;
+  color: var(--color-text-dim);
+}
+
+.chords__instrument {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: var(--color-text-dim);
+  cursor: pointer;
+  outline: none;
+  transition: color 160ms ease;
+}
+
+.chords__instrument:hover,
+.chords__instrument:focus-visible {
+  color: var(--color-text-light);
+}
+
+.chords__instrument.is-active {
+  color: var(--color-accent);
+  cursor: default;
+}
+
+.chords__subtitle {
+  position: absolute;
+  left: 568px;
+  top: 169px;
+  color: var(--color-text-light);
+}
+
+/* Ancorado pela direita: cresce para a esquerda conforme o texto. */
+.answer-input {
+  position: absolute;
+  right: 814px;
+  top: 246px;
+  width: 64px;
+  height: 32px;
+  padding: 0 2px;
+  border: 0;
+  border-bottom: 1px solid var(--color-text-light);
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 24px;
+  line-height: normal;
+  color: var(--color-text-light);
+  text-align: center;
+  caret-color: var(--color-accent);
+  transition: border-color 160ms ease;
+}
+
+.answer-input:focus {
+  border-bottom-color: var(--color-accent);
+}
+
+.answer-button {
+  position: absolute;
+  left: 820px;
+  top: 257px;
+  width: 94px;
+  padding: 0;
+  text-align: center;
+}
+
+/* ---------- Lista de acordes ---------- */
+
+.chords__grid {
+  position: absolute;
+  left: 0;
+  top: 316px;
+  width: 1582px;
+  height: 372px;
+  padding: 11px 0 30px 91px;
+  display: grid;
+  grid-template-columns: repeat(7, 213px);
+  align-content: start;
+  row-gap: 42px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.chords__grid::-webkit-scrollbar {
+  width: 10px;
+}
+
+.chords__grid::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: var(--color-scroll);
+}
+
+.chords__empty {
+  position: absolute;
+  left: 0;
+  top: 360px;
+  width: 100%;
+  text-align: center;
+  color: var(--color-text-dim);
+}
+
+.chords__empty[hidden] {
+  display: none;
+}
+
+.chord {
+  width: 138px;
+}
+
+.chord--row-start {
+  grid-column-start: 1;
+}
+
+.chord__name {
+  margin-bottom: 4px;
+  text-align: center;
+  color: var(--color-text-light);
+}
+
+.chord__position {
+  margin-left: 8px;
+  font-size: 16px;
+  color: var(--color-text-dim);
+}
+
+.chord__diagram {
+  display: block;
+}
+
+.chord__nut {
+  fill: var(--color-surface-raised);
+}
+
+.chord__string {
+  stroke: var(--chord-string);
+  stroke-width: 1;
+}
+
+.chord__fret {
+  stroke: var(--chord-fret);
+  stroke-width: 1;
+}
+
+.chord__mute {
+  fill: var(--chord-mute);
+  font-family: sans-serif;
+  font-size: 15px;
+  text-anchor: middle;
+}
+
+.chord__barre {
+  stroke: var(--chord-mark);
+  stroke-width: 4;
+}
+
+.chord__dot {
+  fill: var(--chord-mark);
+}
+
+.chord__white-key {
+  fill: var(--piano-white);
+  stroke: var(--color-bg);
+  stroke-width: 1.5;
+}
+
+.chord__black-key {
+  fill: var(--piano-black);
+}
+
+/* No piano o teclado é mais largo e mais baixo que o braço do violão. */
+.chords[data-instrument='piano'] .chords__grid {
+  padding-left: 67px;
+  row-gap: 52px;
+}
+
+.chords[data-instrument='piano'] .chord {
+  width: 186px;
+}
+
+/* Sem botão ao lado: o campo fica centralizado e cresce para os dois lados. */
+.answer-input--centered {
+  right: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.chords[data-instrument='piano'] .chord__dot {
+  fill: var(--piano-dot);
+}

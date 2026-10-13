@@ -1,0 +1,522 @@
+/* TELA 2 — Cifras e Partituras (Figma node 3:3484): mesma tela para violão e piano */
+
+/* ---------- Pasta dos arquivos ---------- */
+
+.library__path {
+  position: absolute;
+  left: 82px;
+  top: 141px;
+  max-width: 1170px;
+  display: flex;
+  gap: 18px;
+  font-size: 24px;
+  white-space: nowrap;
+}
+
+.library__path-label {
+  flex: none;
+  color: var(--color-text-light);
+}
+
+.library__path-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--color-text-dim);
+}
+
+.library__write {
+  position: absolute;
+  left: 1282px;
+  top: 141px;
+  width: 230px;
+}
+
+/* ---------- Menu de opções ("...") ---------- */
+
+.library__options-toggle {
+  position: absolute;
+  left: 1538px;
+  top: 147px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 160ms ease;
+}
+
+.library__options-toggle:hover,
+.library__options-toggle:focus-visible,
+.library__options-toggle[aria-expanded='true'] {
+  background: rgba(var(--overlay-rgb), 0.12);
+}
+
+.library__options-toggle img {
+  display: block;
+}
+
+.library__menu {
+  position: absolute;
+  right: 35px;
+  top: 188px;
+  z-index: 5;
+  width: 210px;
+  padding: 16px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 6px;
+  background: var(--color-surface);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+  /* 14px na tela (a janela é exibida a 80% do design). */
+  font-size: 17.5px;
+  white-space: nowrap;
+}
+
+.library__menu[hidden] {
+  display: none;
+}
+
+/* Setinha apontando para o ícone */
+.library__menu::before {
+  content: '';
+  position: absolute;
+  right: 8px;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  background: var(--color-surface);
+  transform: rotate(45deg);
+}
+
+.library__menu-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.toggle--small {
+  width: 60px;
+  height: 17px;
+}
+
+.toggle--small .toggle__knob {
+  left: 30px;
+  width: 30px;
+  height: 17px;
+  font-size: 12px;
+}
+
+.library__menu-divider {
+  height: 1px;
+  margin: 4px 0;
+  border: 0;
+  background: var(--color-bg);
+}
+
+.library__menu-item {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: var(--color-text-muted);
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  transition: color 160ms ease;
+}
+
+.library__menu-item:hover,
+.library__menu-item:focus-visible {
+  color: var(--color-text-light);
+}
+
+.library__menu-item.is-active {
+  color: var(--color-accent);
+}
+
+/* ---------- Lista de bandas ---------- */
+
+.bands {
+  position: absolute;
+  left: 0;
+  top: 196px;
+  width: 100%;
+  height: 570px;
+  padding: 0 74px;
+  display: flex;
+  align-items: flex-start;
+  gap: 37px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.bands::-webkit-scrollbar {
+  display: none;
+}
+
+.bands.is-dragging {
+  cursor: grabbing;
+}
+
+.bands.is-dragging * {
+  pointer-events: none;
+}
+
+/* Setas para percorrer o catálogo */
+.bands__arrow {
+  position: absolute;
+  top: 284px;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(49, 49, 49, 0.92);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  outline: none;
+  transition: background-color 160ms ease, opacity 160ms ease;
+}
+
+.bands__arrow[hidden] {
+  display: none;
+}
+
+.bands__arrow:hover,
+.bands__arrow:focus-visible {
+  background: var(--color-accent);
+}
+
+.bands__arrow::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 17px;
+  width: 12px;
+  height: 12px;
+  border-left: 2px solid var(--color-white);
+  border-bottom: 2px solid var(--color-white);
+  transform: rotate(45deg);
+}
+
+.bands__arrow--prev {
+  left: 14px;
+}
+
+.bands__arrow--next {
+  left: 1538px;
+}
+
+.bands__arrow--next::before {
+  left: 14px;
+  transform: rotate(-135deg);
+}
+
+.bands__empty {
+  position: absolute;
+  left: 82px;
+  top: 212px;
+  font-size: 24px;
+  color: var(--color-text-dim);
+}
+
+.bands__empty[hidden] {
+  display: none;
+}
+
+.band {
+  position: relative;
+  flex: 0 0 313px;
+  border-radius: 15px;
+  background: transparent;
+  transition: background-color 220ms ease;
+}
+
+.band.is-expanded {
+  background: var(--color-surface);
+}
+
+.band__header {
+  position: relative;
+  display: block;
+  width: 313px;
+  height: 270px;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  /* 16px na tela: a janela é exibida a 80% do design (UI_SCALE no main.js). */
+  font-size: 20px;
+  line-height: normal;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+}
+
+.band__image {
+  position: absolute;
+  left: 9px;
+  top: 16px;
+  width: 289px;
+  height: 193px;
+  border-radius: 15px;
+  object-fit: cover;
+  transition: filter 160ms ease;
+}
+
+.band__image--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-raised);
+  font-size: 96px;
+  color: var(--color-text-dim);
+}
+
+.band__header:hover .band__image,
+.band__header:focus-visible .band__image {
+  filter: brightness(1.12);
+}
+
+.band__name {
+  position: absolute;
+  left: 16px;
+  top: 233px;
+  max-width: 210px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--color-band-name);
+}
+
+/* O SVG tem 17.22 x 21.15 (traço de 1.5px sangra 0.75px para cada lado) */
+.band__note {
+  position: absolute;
+  left: 233.25px;
+  top: 233.25px;
+  display: block;
+}
+
+.band__count {
+  position: absolute;
+  left: 258px;
+  top: 233px;
+  color: var(--color-accent);
+}
+
+/* Corrigir o nome do artista: lápis sobre a foto + campo no lugar do nome */
+.band__edit {
+  position: absolute;
+  left: 258px;
+  top: 24px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(26, 26, 26, 0.85);
+  opacity: 0;
+  cursor: pointer;
+  outline: none;
+  transition: opacity 160ms ease, background-color 160ms ease;
+}
+
+.band:hover .band__edit,
+.band__edit:focus-visible {
+  opacity: 1;
+}
+
+.band__edit:hover,
+.band__edit:focus-visible {
+  background: var(--color-accent);
+}
+
+.band__edit img {
+  display: block;
+}
+
+.band__name-input {
+  position: absolute;
+  left: 9px;
+  top: 229px;
+  width: 289px;
+  height: 28px;
+  padding: 0 6px;
+  border: 1px solid var(--color-accent);
+  border-radius: 6px;
+  outline: none;
+  background: var(--color-bg);
+  font-family: inherit;
+  font-size: 20px;
+  line-height: normal;
+  color: var(--color-text-light);
+  caret-color: var(--color-accent);
+}
+
+/* Abre/fecha a lista de músicas animando a altura */
+.band__details {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 260ms ease;
+}
+
+.band.is-expanded .band__details {
+  grid-template-rows: 1fr;
+}
+
+.band__details-inner {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.band__divider {
+  position: absolute;
+  left: 9px;
+  top: 12.5px;
+  display: block;
+}
+
+.band__songs {
+  list-style: none;
+  max-height: 300px;
+  padding: 48px 16px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow-y: auto;
+}
+
+.band__songs::-webkit-scrollbar {
+  width: 4px;
+}
+
+.band__songs::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: var(--color-surface-raised);
+}
+
+.band__song {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  /* 14px na tela (ver comentário em .band__header). */
+  font-size: 17.5px;
+  line-height: normal;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  transition: color 160ms ease;
+}
+
+.band__song:hover,
+.band__song:focus-visible {
+  color: var(--color-text-light);
+}
+
+/* Arquivo que não existe mais na pasta */
+.band__song.is-missing {
+  color: var(--color-accent);
+  text-decoration: line-through;
+}
+
+/* ---------- Modo lista: uma linha por artista ---------- */
+
+.bands--list {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.bands--list::-webkit-scrollbar {
+  display: block;
+  width: 10px;
+}
+
+.bands--list::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: var(--color-scroll);
+}
+
+.bands--list .band {
+  flex: none;
+}
+
+.bands--list .band:not(.is-expanded):hover {
+  background: rgba(var(--overlay-rgb), 0.03);
+}
+
+.bands--list .band__header {
+  width: 100%;
+  height: 64px;
+}
+
+.bands--list .band__image {
+  left: 9px;
+  top: 8px;
+  width: 72px;
+  height: 48px;
+  border-radius: 8px;
+}
+
+.bands--list .band__image--empty {
+  font-size: 30px;
+}
+
+.bands--list .band__name {
+  left: 100px;
+  top: 22px;
+  max-width: 1000px;
+}
+
+.bands--list .band__note {
+  left: auto;
+  right: 58px;
+  top: 21px;
+}
+
+.bands--list .band__count {
+  left: auto;
+  right: 16px;
+  top: 22px;
+  min-width: 32px;
+}
+
+.bands--list .band__edit {
+  left: auto;
+  right: 104px;
+  top: 16px;
+}
+
+.bands--list .band__name-input {
+  left: 93px;
+  top: 18px;
+  width: 480px;
+}
+
+.bands--list .band__divider {
+  display: none;
+}
+
+.bands--list .band__songs {
+  max-height: none;
+  padding: 10px 16px 22px 100px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px 32px;
+  overflow: visible;
+}

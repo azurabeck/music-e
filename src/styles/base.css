@@ -1,0 +1,191 @@
+@font-face {
+  font-family: 'Hubballi';
+  src: url('../assets/fonts/hubballi-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+:root {
+  --color-bg: #1a1a1a;
+  --color-text-muted: #7b7b7b;
+  --color-accent: #d4004e;
+  --color-white: #ffffff;
+  --color-surface: #252424;
+  --color-surface-raised: #313131;
+  --color-text-dim: #655f5f;
+  --color-text-light: #dad7d7;
+  --color-search-text: #fdfdfd;
+  --color-band-name: #9e5d5d;
+  --color-tab-active: #f5f5f5;
+  --color-right: #4fd08a;
+  --color-surface-hover: #3b3b3b;
+  --color-tab-text: #000000;
+  --color-scroll: #0a0a0a;
+  --color-divider: #050505;
+  --color-toggle-off: #4a4a4a;
+  /* Cor (RGB) dos realces translúcidos de hover/foco. */
+  --overlay-rgb: 255, 255, 255;
+
+  --chord-string: #9a9a9a;
+  --chord-fret: #3a3a3a;
+  --chord-mark: #e6e6e6;
+  --chord-mute: #b4b4b4;
+  --piano-white: #3d3d3d;
+  --piano-black: #0c0c0c;
+  --piano-dot: #e6e6e6;
+  --staff-line: #4a4a4a;
+  --staff-note: #8a8a8a;
+
+  --app-width: 1600px;
+  --app-height: 900px;
+  --app-radius: 37px;
+
+  --font-brand: 'Hubballi', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: var(--app-width);
+  height: var(--app-height);
+  overflow: hidden;
+  background: transparent;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  -webkit-user-drag: none;
+}
+
+/* Moldura da aplicação: 1600 x 900 com cantos arredondados */
+.app {
+  position: relative;
+  width: var(--app-width);
+  height: var(--app-height);
+  border-radius: var(--app-radius);
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 450ms ease, visibility 0s linear 450ms;
+}
+
+.screen.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 450ms ease;
+}
+
+/* ---------- Controles da janela ---------- */
+
+/* Ícones a 75% do tamanho do design, alinhados pela direita. */
+.window-nav {
+  position: absolute;
+  left: 1498.75px;
+  top: 41px;
+  width: 62.25px;
+  height: 18px;
+  z-index: 10;
+}
+
+.window-nav__icons {
+  position: absolute;
+  left: -0.56px;
+  top: -0.56px;
+  width: 63.375px;
+  height: 19.125px;
+  display: block;
+  pointer-events: none;
+}
+
+.window-nav__btn {
+  position: absolute;
+  top: -7px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 160ms ease;
+}
+
+.window-nav__btn--minimize {
+  left: -7px;
+}
+
+.window-nav__btn--close {
+  left: 37.25px;
+}
+
+.window-nav__btn:hover,
+.window-nav__btn:focus-visible {
+  background: rgba(var(--overlay-rgb), 0.08);
+}
+
+.window-nav__btn--close:hover,
+.window-nav__btn--close:focus-visible {
+  background: rgba(212, 0, 78, 0.35);
+}
+
+.window-nav__btn:active {
+  background: rgba(var(--overlay-rgb), 0.16);
+}
+
+/* ---------- Tema claro ---------- */
+
+:root[data-theme='light'] {
+  --color-bg: #f5f5f5;
+  --color-text-muted: #6f6f6f;
+  --color-surface: #e9e9e9;
+  --color-surface-raised: #dedede;
+  --color-surface-hover: #d2d2d2;
+  --color-text-dim: #8c8c8c;
+  --color-text-light: #232323;
+  --color-search-text: #1a1a1a;
+  --color-band-name: #9e5d5d;
+  --color-tab-text: #8c8c8c;
+  --color-tab-active: #1a1a1a;
+  --color-right: #1f9d5c;
+  --color-scroll: #c2c2c2;
+  --color-divider: #d0d0d0;
+  --color-toggle-off: #b9b9b9;
+  --overlay-rgb: 0, 0, 0;
+
+  --chord-string: #7a7a7a;
+  --chord-fret: #cfcfcf;
+  --chord-mark: #232323;
+  --chord-mute: #6f6f6f;
+  --piano-white: #ffffff;
+  --piano-black: #232323;
+  --piano-dot: var(--color-accent);
+  --staff-line: #b5b5b5;
+  --staff-note: #555555;
+}
+
+/* Ícones desenhados para o fundo escuro são invertidos no tema claro
+   (a tela de loading continua escura). */
+:root[data-theme='light'] .app:has(#screen-main.is-active) .window-nav__icons,
+:root[data-theme='light'] .search__bg,
+:root[data-theme='light'] .library__options-toggle img {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+:root[data-theme='light'] .band__divider {
+  filter: invert(0.9);
+}

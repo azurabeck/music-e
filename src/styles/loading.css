@@ -1,0 +1,75 @@
+/* TELA 1 — Loading (Figma node 2:3355) */
+
+/* Sempre escura, mesmo no tema claro: a foto é escura. */
+.loading {
+  background: #1a1a1a;
+}
+
+.loading__image {
+  position: absolute;
+  left: 49px;
+  top: 0;
+  width: 671px;
+  height: 895px;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.loading__logo {
+  font-family: var(--font-brand);
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+  animation: loading-fade-in 700ms ease-out both;
+}
+
+.loading__logo-title {
+  position: absolute;
+  left: 987px;
+  top: 339px;
+  font-size: 96px;
+  color: var(--color-text-muted);
+}
+
+.loading__logo-sub {
+  position: absolute;
+  left: 1304px;
+  top: 414px;
+  font-size: 36px;
+  color: var(--color-accent);
+}
+
+.loading__spinner {
+  position: absolute;
+  left: 1164px;
+  top: 506px;
+  width: 57px;
+  height: 53px;
+  animation: loading-spin 1.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* O SVG tem 58.5 x 54.5 (traço de 1.5px sangra 0.75px para cada lado) */
+.loading__spinner img {
+  position: absolute;
+  left: -0.75px;
+  top: -0.75px;
+  display: block;
+}
+
+@keyframes loading-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loading-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "music-e",
+  "productName": "MUSIC-E",
+  "version": "0.1.3",
+  "description": "MUSIC-E",
+  "author": "Rebecca Souza",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/chords.test.js",
+    "dist": "node scripts/dist.js",
+    "release": "node scripts/dist.js --publish"
+  },
+  "build": {
+    "appId": "com.musice.app",
+    "productName": "MUSIC-E",
+    "files": [
+      "main.js",
+      "preload.js",
+      "lib/**/*",
+      "src/**/*"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "MUSIC-E"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "azurabeck",
+        "repo": "music-e"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@fontsource/hubballi": "^5.3.0",
+    "electron": "^44.7.0",
+    "electron-builder": "^26.15.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azurabeck/music-e.git"
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.9"
+  }
+}
